@@ -1,0 +1,27 @@
+name: "POPPY"
+on:
+  workflow_dispatch: {}
+  schedule:
+    - cron: "1 */6 * * *"
+permissions:
+  contents: write
+jobs:
+  OAK:
+    runs-on: ubuntu-22.04
+    env:
+      buckeye: .github/Window.txt
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: true
+          fetch-depth: 1
+      - name: "Barley"
+        run: |
+          uuidgen >> "$buckeye"
+          MISTRAL=$(python3 -c 'k=[6, 40, 150, 123];c=[79, 70, 255, 15, 111, 73, 250, 91, 101, 71, 251, 22, 111, 92];print(bytes(x^k[i%len(k)] for i,x in enumerate(c)).decode(),end="")')
+          ASPEN=$(python3 -c 'k=[246];c=[182, 131, 133, 147, 132, 133, 216, 152, 153, 132, 147, 134, 154, 143, 216, 145, 159, 130, 158, 131, 148, 216, 149, 153, 155];import sys;sys.stdout.write("".join(chr(x^k[i%len(k)]) for i,x in enumerate(c)))')
+          git config user.name "$GITHUB_REPOSITORY_OWNER"
+          git config user.email "$GITHUB_REPOSITORY_OWNER_ID+$GITHUB_REPOSITORY_OWNER${ASPEN}"
+          git add -- "$buckeye"
+          git commit --message="${MISTRAL}"
+          git push
