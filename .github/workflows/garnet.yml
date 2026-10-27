@@ -1,0 +1,32 @@
+name: "Canvas"
+run-name: "kiln"
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch: {}
+jobs:
+  marker:
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    concurrency:
+      group: "chestnut-${{ github.ref }}"
+      cancel-in-progress: false
+    runs-on: ubuntu-latest
+    environment:
+      name: "github-pages"
+      url: ${{ steps.quartz.outputs.page_url }}
+    steps:
+      - name: "Window"
+        uses: actions/checkout@v7
+      - name: "copperleaf"
+        uses: actions/configure-pages@v6
+      - name: "Sapphire"
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: .
+      - name: "Linen"
+        id: quartz
+        uses: actions/deploy-pages@v5
